@@ -14,8 +14,8 @@ import java.util.List;
 @Builder
 @Value
 @Validated
-@JsonDeserialize()
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonDeserialize(builder = BasketRequestDTO.BasketRequestDTOBuilder.class)
 public class BasketRequestDTO {
 
     @JsonProperty("status")

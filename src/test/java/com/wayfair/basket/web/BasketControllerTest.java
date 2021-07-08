@@ -2,6 +2,7 @@ package com.wayfair.basket.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wayfair.basket.WayfairBasketServiceApplication;
+import com.wayfair.basket.dto.BasketTestFixtures;
 import com.wayfair.basket.service.BasketService;
 import com.wayfair.basket.web.controller.BasketController;
 import org.junit.Test;
@@ -33,8 +34,9 @@ public class BasketControllerTest {
     void respondWith200StatusOK() throws Exception {
         mockMvc.perform(post("/api/v1/basket")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(null)));
-        verify(basketService).createBasket(null);
+                .content(objectMapper.writeValueAsString(BasketTestFixtures.buildBasketRequest())))
+                .andExpect(status().isOk());
+
     }
 
     @Test
@@ -44,6 +46,4 @@ public class BasketControllerTest {
                 .content(objectMapper.writeValueAsString(null)))
                 .andExpect(status().isBadRequest());
     }
-
-
 }
